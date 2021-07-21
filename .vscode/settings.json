@@ -1,0 +1,28 @@
+{
+    "python.languageServer": "Pylance",
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    /** Enable format on save */
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        /** Pyformat use it's own code action to  */
+        "source.organizeImports": true
+    },
+    "auto-close-tag.enableAutoCloseTag": true,
+    "externalFormatters.languages": {
+        "<language id>": {
+            "command": "<command to run>",
+            "arguments": [
+                "<first argument>",
+                "<second argument>",
+            ]
+        },
+    }
+}

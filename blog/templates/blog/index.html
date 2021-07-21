@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+My Blog
+
+{% endblock title %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/index.css' %}" />
+<link rel="stylesheet" href="{% static 'blog/post.css' %}" />
+{% endblock css_files %}
+
+{% block content %}
+
+
+<section id="welcome">
+
+    <header>
+        <img src="{%static "blog/images/RFM.jpeg" %}" alt="Raphael RFM Author of this Blog" />
+        <h2>Raphael Mulenda Blog</h2>
+    </header>
+    <p>Hi, I am RFM and I love programing </p>
+</section>
+
+<sectiion id="latest-posts">
+    <h2> My lastedt thoughts</h2>0
+    <ul>
+        {% for  post in posts %}
+        {% include "blog/includes/post.html" %}
+        {% endfor %}
+
+    </ul>
+
+    </section>
+
+
+
+    <section id="about">
+        <h2>What I Do</h2>
+        <p>Nisl condimentum id venenatis a condimentum vitae sapien pellentesque habitant. </p>
+        <p>Ultrices gravida dictum fusce ut placerat orci nulla. Quisque non tellus orci ac auctor augue. </p>
+    </section>
+
+    </section>
+
+    {% endblock content %}
