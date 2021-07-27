@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from datetime import date
+from .models import Post, Author, Tag
 
 
 all_posts = [
@@ -75,16 +76,24 @@ def get_date(post):
 
 
 def starting_page(request):
-    sorted_posts = sorted(all_posts, key=get_date)
-    lastest_posts = sorted_posts [-3:]
-    return render(request, "blog/index.html", {"posts": lastest_posts})
+    all_the_posts = Post.objects.all().order_by('posted_date')
+    posts = {
+        'post':all_the_posts
+    }
+    
+    
+    return render(request, "blog/index.html", posts)
 
 
 def posts(request):
-    return render(request, "blog/all-posts.html",{"all_posts": all_posts})
+    pass
+   # all_posted_posts = Post.objects.all().order_by('posted_date')
+    #return render(request, "blog/all-posts.html",{"all_posts": all_posted_posts})
 
 
 def post_detail(reqeust, slug):
+    pass
+    
     selected_post = next(post for post in all_posts if post['slug'] == slug)
 
-    return render(reqeust, "blog/post-detail.html", {"post": selected_post})
+    #return render(reqeust, "blog/post-detail.html", {"post": selected_post})
