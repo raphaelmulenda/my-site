@@ -22,5 +22,7 @@ admin.site.register(Tag, TagAdmin)
 class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'author','posted_date')
     list_display_links = ('id', 'title')
+    list_filter =("author",'tags','posted_date')
+    prepopulated_fields = {"slug":("title",)}
 
 admin.site.register(Post,PostAdmin)
