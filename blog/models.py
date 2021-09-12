@@ -31,8 +31,15 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self) :
-        return f"{self.title} {self.excerpt}"
+        return f"{self.title} "
 
 
 
 
+#The bellow model for comment will be a one to many rlationship 
+
+class Comment(models.Model):
+    user_name = models.CharField(max_length=120)
+    user_email = models.EmailField()
+    text = models.TextField(max_length=450)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE , related_name="comments") #on_delet Cascade will delete the comment if the poste will be deleted
