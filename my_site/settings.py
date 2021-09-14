@@ -10,8 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from pathlib import Path
 import os
+from os import getenv
+from pathlib import Path
+from typing import cast
+
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +25,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&4@#gv%7sme9tjha+3ys1@kh)racfe3hf(nejb^v(h%oaz1sih'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [getenv("APP_HOST")]
 
 
 # Application definition
@@ -78,10 +82,10 @@ WSGI_APPLICATION = 'my_site.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blogdb',
-        'USER': 'postgres',
-        'PASSWORD': '0811890235rfM',
-        'HOST': 'localhost',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config("DB_PASSWORD"),
+        'HOST': config("HOST"),
     }
 }
 
@@ -122,7 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = BASE_DIR/ "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR/"static"]
 
@@ -131,6 +135,6 @@ STATICFILES_DIRS = [BASE_DIR/"static"]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Media Folder Setting
+# Media Folder Setting
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
